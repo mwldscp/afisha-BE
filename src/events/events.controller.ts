@@ -1,7 +1,7 @@
 import { Controller } from "@nestjs/common";
-import { AppService } from "./events.service";
+import { EventsService } from "./events.service";
 
 @Controller()
-export class AppController{
-    constructor(private readonly appService: AppService) {}
+export class EventsController{
+    constructor(private readonly eventsService: EventsService) {}
 }
