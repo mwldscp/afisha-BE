@@ -63,7 +63,7 @@ export class EventsService {
     };
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     const event = await this.eventRepository.findOne({
       where: { id },
     });
@@ -75,7 +75,7 @@ export class EventsService {
     return event;
   }
 
-  async update(id: number, updateEventDto: UpdateEventDto) {
+  async update(id: string, updateEventDto: UpdateEventDto) {
     await this.findOne(id);
 
     await this.eventRepository.update(id, updateEventDto);
@@ -83,7 +83,7 @@ export class EventsService {
     return this.findOne(id);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     await this.findOne(id);
 
     await this.eventRepository.delete(id);
