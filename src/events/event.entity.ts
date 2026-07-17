@@ -3,34 +3,44 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Category } from './category.enum';
+import Decimal from 'decimal.js';
 
 @Entity('events')
 export class Event {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
   @Column({ length: 200 })
-  title: string;
+  title!: string;
 
   @Column('text')
-  description: string;
+  description!: string;
 
   @Column()
-  date: Date;
+  date!: Date;
 
   @Column({ length: 200 })
-  location: string;
+  location!: string;
 
   @Column({
     type: 'enum',
     enum: Category,
   })
-  category: Category;
+  category!: Category;
 
-  @Column()
-  price: number;
+  @Column({
+    type: 'numeric',
+    precision: 10,
+    scale: 2,
+    transformer: {
+      to: (value: Decimal) => (value ? value.toString() : value),
+      from: (value: string) => (value ? new Decimal(value) : value),
+    },
+  })
+  price!: Decimal;
 
   @Column({
     length: 500,
@@ -39,5 +49,8 @@ export class Event {
   imageUrl?: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }
