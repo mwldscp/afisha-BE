@@ -12,6 +12,7 @@ import { EventsModule } from './events/events.module';
 
     TypeOrmModule.forRoot({
       type: 'postgres',
+      url: process.env.DATABASE_URL,
       host: process.env.DB_HOST,
       port: parseInt(process.env.DB_PORT || '5432', 10),
       username: process.env.DB_USERNAME,
@@ -20,6 +21,8 @@ import { EventsModule } from './events/events.module';
 
       autoLoadEntities: true,
       synchronize: true,
+
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
     }),
 
     EventsModule,
