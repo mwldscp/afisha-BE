@@ -10,6 +10,7 @@ import {
   Matches,
   MinDate,
   IsDate,
+  MaxLength,
 } from 'class-validator';
 import { Category } from '../category.enum';
 import { Type } from 'class-transformer';
@@ -32,7 +33,7 @@ export class CreateEventDto {
 
   @IsString({ message: 'Место должно быть строкой' })
   @IsNotEmpty({ message: 'Место обязательно' })
-  @Length(200)
+  @MaxLength(200, {message: 'Место не может быть длиннее 200 символов'})
   location!: string;
 
   @IsEnum(Category)
