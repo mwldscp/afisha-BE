@@ -32,7 +32,7 @@ export class CreateEventDto {
 
   @IsString({ message: 'Место должно быть строкой' })
   @IsNotEmpty({ message: 'Место обязательно' })
-  @Length(3, 200)
+  @Length(200)
   location!: string;
 
   @IsEnum(Category)
