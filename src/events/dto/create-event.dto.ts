@@ -37,7 +37,6 @@ export class CreateEventDto {
   location!: string;
 
   @IsEnum(Category)
-  @IsNotEmpty({ message: 'Категория обязательна. ' })
   category!: Category;
 
   @IsDecimal({}, { message: 'Цена должна быть корректным десятичным числом. ' })
